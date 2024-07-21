@@ -1,3 +1,16 @@
+---
+title: "Final DALYs CMNN for Tanzania, DRC and Nigeria"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    toc: true
+    number_sections: true
+author: "Lameck Luwanda"
+date: "2024-07-21"
+editor_options: 
+  chunk_output_type: inline
+---
+
 # Communicable, Maternal, Neonatal, and Nutritional Disease Burden (CMNN)
 
 ```{r, echo=FALSE, message=FALSE}
