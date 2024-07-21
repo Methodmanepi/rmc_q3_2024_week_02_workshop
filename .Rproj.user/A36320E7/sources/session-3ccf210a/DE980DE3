@@ -1,0 +1,32 @@
+{
+    "id": "DE980DE3",
+    "path": "~/GitHub/rmc_q3_2024_week_02_workshop/rmd/02_ncd_burden_CHILD.Rmd",
+    "project_path": "rmd/02_ncd_burden_CHILD.Rmd",
+    "type": "r_markdown",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1721234921209.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "7,0",
+        "scrollLine": "75",
+        "last_setup_crc32": "3ccf210a26dcca91",
+        "rmdVisualMode": "true",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "1",
+        "rmdVisualModeLocation": "125:0",
+        "rmdVisualCollapsedChunks": ""
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1721562674,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1721562674783,
+    "read_only": false,
+    "read_only_alternatives": []
+}
