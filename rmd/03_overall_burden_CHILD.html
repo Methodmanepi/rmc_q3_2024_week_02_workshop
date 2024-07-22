@@ -31,97 +31,6 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </script>
 
 
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-{ counter-reset: source-line 0; }
-pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-color: #aaaaaa;
-}
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
-div.sourceCode
-{ }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } 
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.at { color: #7d9029; } 
-code span.bn { color: #40a070; } 
-code span.bu { color: #008000; } 
-code span.cf { color: #007020; font-weight: bold; } 
-code span.ch { color: #4070a0; } 
-code span.cn { color: #880000; } 
-code span.co { color: #60a0b0; font-style: italic; } 
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.do { color: #ba2121; font-style: italic; } 
-code span.dt { color: #902000; } 
-code span.dv { color: #40a070; } 
-code span.er { color: #ff0000; font-weight: bold; } 
-code span.ex { } 
-code span.fl { color: #40a070; } 
-code span.fu { color: #06287e; } 
-code span.im { color: #008000; font-weight: bold; } 
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
-code span.kw { color: #007020; font-weight: bold; } 
-code span.op { color: #666666; } 
-code span.ot { color: #007020; } 
-code span.pp { color: #bc7a00; } 
-code span.sc { color: #4070a0; } 
-code span.ss { color: #bb6688; } 
-code span.st { color: #4070a0; } 
-code span.va { color: #19177c; } 
-code span.vs { color: #4070a0; } 
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
-
-a.sourceLine {
-pointer-events: auto;
-}
-</style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
-</script>
 
 
 
@@ -170,27 +79,582 @@ Findings</a></li>
 <div id="overall-disease-burden" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Overall Disease
 Burden</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, knitr, here)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the overall disease data</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_overall <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/burden-of-disease-all-causes.csv&quot;</span>))</span></code></pre></div>
-<pre><code>## Rows: 8100 Columns: 4
-## ── Column specification ────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr (2): Entity, Code
-## dbl (2): Year, DALYs (Disability-Adjusted Life Years) - All causes - Sex: Bo...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>##Personal</p>
 <div id="table-of-estimates-for-overall-disease-burden-over-time" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Table of Estimates
 for Overall Disease Burden Over Time</h2>
+<pre><code>## # A tibble: 90 × 5
+##    code   year `Democratic Republic of Congo` Nigeria Tanzania
+##    &lt;chr&gt; &lt;dbl&gt;                          &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+##  1 COD    1990                         83323.      NA       NA
+##  2 COD    1991                         83534.      NA       NA
+##  3 COD    1992                         83579.      NA       NA
+##  4 COD    1993                         84212.      NA       NA
+##  5 COD    1994                         84807.      NA       NA
+##  6 COD    1995                         84849.      NA       NA
+##  7 COD    1996                         90220.      NA       NA
+##  8 COD    1997                         86665.      NA       NA
+##  9 COD    1998                         85784.      NA       NA
+## 10 COD    1999                         84962.      NA       NA
+## # … with 80 more rows</code></pre>
+<table>
+<caption>DALYs for NIgeria, DRC, and Tanzania Over time</caption>
+<thead>
+<tr class="header">
+<th align="left">country</th>
+<th align="left">code</th>
+<th align="right">year</th>
+<th align="right">daly</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">1990</td>
+<td align="right">83323.46</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">1991</td>
+<td align="right">83534.47</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">1992</td>
+<td align="right">83579.16</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">1993</td>
+<td align="right">84212.14</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">1994</td>
+<td align="right">84807.08</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">1995</td>
+<td align="right">84848.66</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">1996</td>
+<td align="right">90220.16</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">1997</td>
+<td align="right">86664.90</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">1998</td>
+<td align="right">85784.02</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">1999</td>
+<td align="right">84961.69</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2000</td>
+<td align="right">83639.74</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2001</td>
+<td align="right">82609.63</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2002</td>
+<td align="right">82098.45</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2003</td>
+<td align="right">80679.08</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2004</td>
+<td align="right">78468.77</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2005</td>
+<td align="right">76324.96</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2006</td>
+<td align="right">74640.68</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2007</td>
+<td align="right">73064.95</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2008</td>
+<td align="right">71799.47</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2009</td>
+<td align="right">70163.14</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2010</td>
+<td align="right">67626.27</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2011</td>
+<td align="right">65691.85</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2012</td>
+<td align="right">63729.20</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2013</td>
+<td align="right">61311.53</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2014</td>
+<td align="right">58836.46</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2015</td>
+<td align="right">56520.17</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2016</td>
+<td align="right">54665.84</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2017</td>
+<td align="right">53162.10</td>
+</tr>
+<tr class="odd">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2018</td>
+<td align="right">51196.74</td>
+</tr>
+<tr class="even">
+<td align="left">Democratic Republic of Congo</td>
+<td align="left">COD</td>
+<td align="right">2019</td>
+<td align="right">50113.59</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">1990</td>
+<td align="right">83225.66</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">1991</td>
+<td align="right">83782.38</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">1992</td>
+<td align="right">83103.23</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">1993</td>
+<td align="right">82991.49</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">1994</td>
+<td align="right">82969.94</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">1995</td>
+<td align="right">83026.21</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">1996</td>
+<td align="right">83770.22</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">1997</td>
+<td align="right">82829.75</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">1998</td>
+<td align="right">82842.87</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">1999</td>
+<td align="right">82873.98</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2000</td>
+<td align="right">82601.23</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2001</td>
+<td align="right">81850.25</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2002</td>
+<td align="right">80780.64</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2003</td>
+<td align="right">79278.81</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2004</td>
+<td align="right">77540.38</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2005</td>
+<td align="right">75379.06</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2006</td>
+<td align="right">73330.45</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2007</td>
+<td align="right">71176.37</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2008</td>
+<td align="right">69242.37</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2009</td>
+<td align="right">67483.05</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2010</td>
+<td align="right">65739.92</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2011</td>
+<td align="right">64174.38</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2012</td>
+<td align="right">62740.79</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2013</td>
+<td align="right">61468.45</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2014</td>
+<td align="right">60410.35</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2015</td>
+<td align="right">59034.54</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2016</td>
+<td align="right">57477.91</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2017</td>
+<td align="right">56018.08</td>
+</tr>
+<tr class="odd">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2018</td>
+<td align="right">54681.25</td>
+</tr>
+<tr class="even">
+<td align="left">Nigeria</td>
+<td align="left">NGA</td>
+<td align="right">2019</td>
+<td align="right">53229.60</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">1990</td>
+<td align="right">79273.45</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">1991</td>
+<td align="right">80768.11</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">1992</td>
+<td align="right">82640.63</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">1993</td>
+<td align="right">83908.09</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">1994</td>
+<td align="right">85360.81</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">1995</td>
+<td align="right">86297.41</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">1996</td>
+<td align="right">86873.98</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">1997</td>
+<td align="right">87144.86</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">1998</td>
+<td align="right">86908.36</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">1999</td>
+<td align="right">85691.95</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2000</td>
+<td align="right">84057.21</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2001</td>
+<td align="right">81988.07</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2002</td>
+<td align="right">79893.86</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2003</td>
+<td align="right">77666.55</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2004</td>
+<td align="right">75650.09</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2005</td>
+<td align="right">73645.37</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2006</td>
+<td align="right">71091.81</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2007</td>
+<td align="right">67543.71</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2008</td>
+<td align="right">64439.49</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2009</td>
+<td align="right">62312.52</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2010</td>
+<td align="right">60240.87</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2011</td>
+<td align="right">58427.44</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2012</td>
+<td align="right">55966.89</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2013</td>
+<td align="right">53340.93</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2014</td>
+<td align="right">51386.28</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2015</td>
+<td align="right">50012.14</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2016</td>
+<td align="right">48911.26</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2017</td>
+<td align="right">47725.68</td>
+</tr>
+<tr class="odd">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2018</td>
+<td align="right">46146.57</td>
+</tr>
+<tr class="even">
+<td align="left">Tanzania</td>
+<td align="left">TZA</td>
+<td align="right">2019</td>
+<td align="right">44863.07</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="plot-showing-trends-in-overall-disease-burden-over-time" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Plot Showing Trends
 in Overall Disease Burden Over Time</h2>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 <div id="summary-of-overall-disease-burden-findings" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Summary of Overall

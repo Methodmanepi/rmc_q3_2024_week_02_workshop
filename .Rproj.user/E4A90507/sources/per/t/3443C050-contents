@@ -65,7 +65,7 @@ ggplot(Data_overall_clean, aes(x = year,
       y = daly,
       color = country, group = country)) +
   geom_line(linewidth = 1) +
-  labs(title = "DALYs for NIgeria, DRC, and Tanzania Over time",
+  labs(title = "DALYs for Nigeria, DRC, and Tanzania Over time",
        x = "Year",
        y = "DALY (Disability-Adjusted Life Years)",
        color = "Country") +
