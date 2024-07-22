@@ -1,0 +1,153 @@
+---
+title: "Workshop 6: Grouping, Summarizing and Plotting"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    toc: true
+    number_sections: true
+author: "Lameck Luwanda"
+date: "2024-05-14"
+editor_options: 
+  chunk_output_type: inline
+---
+
+# Data preparation
+
+```{r,echo=FALSE, message=FALSE}
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(tidyverse, here, janitor, esquisse)
+
+# Importing CSV data file
+tb_raw <- read_csv(here("data/india_tuberculosis.csv"))
+
+# Checking
+head(tb_raw) 
+```
+
+
+# Data cleaning
+```{r,echo=FALSE, message=FALSE}
+# Clean variable names
+tb_renamed <- janitor::clean_names(tb_raw)
+
+# count() lets you quickly count the unique values of variables
+tb_renamed %>% 
+  count(education)
+#Converting and rearanding education levels in order
+tb_clean <- tb_renamed %>%
+  mutate(education = factor(education,
+                              levels =  c("No Education",
+                                            "Primary",
+                                            "Middle",
+                                            "Secondary",
+                                            "Higher Secondary",
+                                            "Graduate",
+                                            "Graduate & Above",
+                                            "Missing") ) )
+tb_clean %>% 
+  count(education)
+
+```
+
+# Investigating healthcare costs
+
+## Step 1: Calculating a `total_cost` variable
+
+```{r,echo=FALSE, message=FALSE}
+tb_clean2 <- tb_clean %>% 
+  mutate(total_cost= first_visit_cost + second_visit_cost + third_visit_cost)
+```
+
+## Step 2: Summarizing costs by education groups
+```{r,echo=FALSE, message=FALSE}
+edu_cost_table <- tb_clean2 %>% 
+  group_by(education) %>% 
+  summarise(number_pts= n(),mean_total_cost=mean(total_cost))
+
+edu_cost_table
+```
+
+Reordering the rows of the summary table to go from highest to lowest mean cost.
+
+```{r,echo=FALSE, message=FALSE}
+edu_cost_table %>% arrange(desc(mean_total_cost))
+```
+
+Here we can see that TB patients in this study with little to no schooling generally spent less money on treatment than graduates. This data can be better communicated with a plot.
+
+------------------------------------------------------------------------
+
+# Visualize data with {esquisse}
+
+```{r,echo=FALSE, message=FALSE}
+# esquisser(edu_cost_table)
+
+#esquisse::esquisser(edu_cost_table)
+
+library(ggplot2)
+cost_incurred_education_plot <- ggplot(edu_cost_table) +
+  aes(
+    x = education,
+    y = mean_total_cost,
+    fill = mean_total_cost
+  ) +
+  geom_col() +
+  scale_fill_gradient() +
+  labs(
+    x = "Education level",
+    y = "Mean cost ",
+    title = "Cost incurred by TB patients to visit clinic",
+    subtitle = "Data for only three clinical visits"
+  ) +
+  coord_flip() +
+  theme_minimal()
+```
+
+Saving the plot
+
+```{r,echo=FALSE, message=FALSE}
+# Save your plot(s)
+ggsave(filename = here("outputs/cost_incurred_education_plot.jpeg"), plot = cost_incurred_education_plot, width = 10, height = 8)
+
+```
+
+
+# Bonus Challenge (Optional and ungraded)
+
+Looking at two types of health facilities in the dataset: private and public (government).
+
+```{r,echo=FALSE, message=FALSE}
+# List of 9 healthcare locations
+tb_clean2 %>% count(first_visit_location)
+```
+
+Note: PHC = primary health center, GH = govt hospital etc.
+
+## Comparing Delays in Public vs Private Health Facilities
+```{r,echo=FALSE, message=FALSE}
+#Creating a new variable to indicate public and private facilities: using the `str_detect()` function from the `{stringr}` package of tidyverse.
+tb_clean3 <- tb_clean2 %>% 
+  mutate(first_visit_type = case_when(
+    str_detect(first_visit_location, "Pvt") ~ "Private",
+    TRUE ~ "Public"))
+```
+Inspect the new variable in the new data frame.
+```{r,echo=FALSE, message=FALSE}
+head(tb_clean3)
+```
+
+###Delays in initiating treatment
+```{r,echo=FALSE, message=FALSE}
+tb_clean3 %>% 
+  group_by(first_visit_type) %>% 
+  summarise(average_treatment_initiation_delay_in_days = mean(treatment_initiation_delay_in_days, na.rm=T), sd_average_treatment_delay= sd(treatment_initiation_delay_in_days, na.rm = T))
+```
+Here we see that, on average, public health facilities delay by 9 days in starting TB treatment, ad the private one delay by 8 days.
+
+### Delays caused by health system issues
+```{r,echo=FALSE, message=FALSE}
+tb_clean3 %>% 
+  group_by(first_visit_type) %>% 
+  summarise(average_health_system_delay_in_days = mean(health_sys_delay_in_days, na.rm=T), sd_average_syt_delay=sd(health_sys_delay_in_days, na.rm=T))
+```
+On average, public health system delay by 25 days to start treatment, while private sector delays more (34 days)

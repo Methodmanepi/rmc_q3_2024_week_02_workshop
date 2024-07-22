@@ -1,6 +1,19 @@
+---
+title: "Overall DALYs for Tanzania, DRC and Nigeria"
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    toc: true
+    number_sections: true
+author: Methodius Okouzi
+date: "2024-07-21"
+editor_options: 
+  chunk_output_type: inline
+---
+
 # Overall Disease Burden
 
-```{r}
+```{r }
 # Load necessary packages
 pacman::p_load(tidyverse, knitr, here)
 
@@ -8,37 +21,55 @@ pacman::p_load(tidyverse, knitr, here)
 data_overall <- read_csv(here("data/burden-of-disease-all-causes.csv"))
 ```
 
-```{r}
-# Filter the dataset to include only the three countries chosen by your group.
-Dall <- data_overall %>% 
-  filter(Entity %in% c("Nigeria", "Democratic Republic of Congo", "Tanzania")) %>% 
-      
 
-  
+```{r include=FALSE}
+Data1 <-data_overall %>% 
+filter(Entity %in% c("Nigeria", "Democratic Republic of Congo", "Tanzania"))
 ```
-```{r}
-DALY <- janitor::clean_names(Dall) 
+
+
+
+
+##Personal
+
+
+```{r include=FALSE}
+DALY <- janitor::clean_names(Data1) 
 view(DALY)
+
+#Rename column with long name
+Data_overall_clean <- DALY %>% 
+  rename(daly = dal_ys_disability_adjusted_life_years_all_causes_sex_both_age_age_standardized_rate, country = entity)
+
 ```
 
 
 ## Table of Estimates for Overall Disease Burden Over Time
 
-```{r}
+```{r echo = FALSE}
 # Here render a table for the DALY burden over time for the three countries. 
 # You should pivot the data to show each country in a separate column.
 # Use kable() from the knitr package to render the table.
-DALY %>% 
-  pivot_wider(values_from = dal_ys_disability_adjusted_life_years_all_causes_sex_both_age_age_standardized_rate , names_from = entity)
+Data_overall_clean %>% 
+  pivot_wider(values_from = daly , names_from = country)
+kable(Data_overall_clean, caption= "DALYs for NIgeria, DRC, and Tanzania Over time")
 
 ```
 
+
 ## Plot Showing Trends in Overall Disease Burden Over Time
 
-```{r}
+```{r echo = FALSE, message =FALSE}
 # Here, plot a line graph showing the trend of DALY burden for the chosen countries over time. You can use ggplot2 to create this plot. Each country's line should be a different color.
-ggplot(data = DALY,  mapping = aes(y = dal_ys_disability_adjusted_life_years_all_causes_sex_both_age_age_standardized_rate, x =  year, group = entity, colour = entity))+
-  geom_line( size = 1)
+ggplot(Data_overall_clean, aes(x = year,
+      y = daly,
+      color = country, group = country)) +
+  geom_line(linewidth = 1) +
+  labs(title = "DALYs for NIgeria, DRC, and Tanzania Over time",
+       x = "Year",
+       y = "DALY (Disability-Adjusted Life Years)",
+       color = "Country") +
+  theme_minimal()
 ```
 
 ## Summary of Overall Disease Burden Findings
