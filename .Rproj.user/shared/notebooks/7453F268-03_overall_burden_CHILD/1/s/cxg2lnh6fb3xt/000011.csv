@@ -1,3 +1,0 @@
-"0","# Here, plot a line graph showing the trend of DALY burden for the chosen countries over time. You can use ggplot2 to create this plot. Each country's line should be a different color."
-"0","ggplot(data = DALY,  mapping = aes(y = dal_ys_disability_adjusted_life_years_all_causes_sex_both_age_age_standardized_rate, x =  year, group = entity, colour = entity))+"
-"0","  geom_line( size = 1)"

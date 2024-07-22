@@ -1,7 +1,0 @@
-"0","# Here render a table for the DALY burden over time for the three countries. "
-"0","# You should pivot the data to show each country in a separate column."
-"0","# Use kable() from the knitr package to render the table."
-"0","  pivot_wider(values_from = daly , names_from = country)"
-"2","Error in pivot_wider(., values_from = daly, names_from = country) : 
-  object 'Data_overall_clean' not found
-"
